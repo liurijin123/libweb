@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+    </script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>抢座</title>
+</head>
+<body>
+
+<div class="jumbotron col-sm-4 col-sm-offset-4">
+    <h3>常用座位</h3>
+    <button type="button" class="btn btn-primary" id="usually1">多媒体阅览室61</button>
+    <button type="button" class="btn btn-primary" id="usually2">多媒体阅览室87</button>
+    <button type="button" class="btn btn-primary" id="usually3">多媒体阅览室88</button>
+    <button type="button" class="btn btn-primary" id="usually4">多媒体阅览室76</button>
+    <button type="button" class="btn btn-primary" id="usually5">多媒体阅览室82</button>
+    <button type="button" class="btn btn-primary" id="usually6">多媒体阅览室78</button>
+    <form>
+        <div class="form-group">
+            <label for="name">用户名</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="form-group">
+            <label for="cookie">cookie</label>
+            <input type="text" class="form-control" id="cookie" name="cookie">
+        </div>
+        <div class="form-group">
+            <label for="libId">libId</label>
+            <input type="text" class="form-control" id="libId" name="libId">
+        </div>
+        <div class="form-group">
+            <label for="x">x</label>
+            <input type="text" class="form-control" id="x" name="x">
+        </div>
+        <div class="form-group">
+            <label for="y">y</label>
+            <input type="text" class="form-control" id="y" name="y">
+        </div>
+        <div class="form-group">
+            <label for="setDate">setDate</label>
+            <input type="text" class="form-control" id="setDate" name="setDate">
+        </div>
+        <button type="button" class="btn btn-default" id="button1">提交</button>
+    </form>
+</div>
+<script>
+    var date = new Date();
+    var setDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " 06:59:59.500";
+    $("#setDate").val(setDate);
+    $("#button1").click(function () {
+        var date = {
+            name: $("#name").val(),
+            cookie: $("#cookie").val(),
+            libId: $("#libId").val(),
+            x: $("#x").val(),
+            y: $("#y").val(),
+            setDate: $("#setDate").val()
+        }
+        $.post("/book", date, function (res) {
+            alert(res)
+        });
+    });
+    $("#usually1").click(function () {
+        setInfo("多媒体阅览室61","",10245,9,27,setDate);
+    });
+    $("#usually2").click(function () {
+        setInfo("多媒体阅览室87","",10245,14,26,setDate);
+    });
+    $("#usually3").click(function () {
+        setInfo("多媒体阅览室88","",10245,15,26,setDate);
+    });
+    $("#usually4").click(function () {
+        setInfo("多媒体阅览室76","",10245,8,17,setDate);
+    });
+    $("#usually5").click(function () {
+        setInfo("多媒体阅览室82","",10245,9,11,setDate);
+    });
+    $("#usually6").click(function () {
+        setInfo("多媒体阅览室78","",10245,9,14,setDate);
+    });
+    function setInfo(name,cookie,libId,x,y,setDate) {
+        $("#name").val(name);
+        $("#cookie").val(cookie);
+        $("#libId").val(libId);
+        $("#x").val(x);
+        $("#y").val(y);
+        $("#setDate").val(setDate);
+    }
+</script>
+</body>
+</html>
